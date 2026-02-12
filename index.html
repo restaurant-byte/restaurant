@@ -3,133 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U WOOD LOVE | Official Site</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>U WOOD LOVE | Authentic Wood Fired Pizza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --dark: #0a0a0a; --card: #151515; --red: #e74c3c; }
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --gold: #d4af37;
+            --gold-hover: #f1c40f;
+            --dark: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --text-light: #e0e0e0;
+            --text-dim: #a0a0a0;
+            --red-accent: #c0392b;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--dark); color: white; font-family: 'Poppins', sans-serif; }
         
-        /* Navigation */
-        nav { position: fixed; width: 100%; padding: 20px; background: rgba(0,0,0,0.9); display: flex; justify-content: space-around; z-index: 1000; border-bottom: 1px solid var(--gold); }
-        nav a { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
+        body { 
+            background-color: var(--dark); 
+            color: var(--text-light); 
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden; 
+        }
 
-        /* Hero Section */
-        #home { height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        #home h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold); margin-bottom: 10px; }
-        .btn { padding: 12px 30px; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; border-radius: 30px; transition: 0.4s; margin: 10px; display: inline-block; }
-        .btn:hover { background: var(--gold); color: black; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
-        /* Sections General */
-        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
-        h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; }
-
-        /* Menu Grid */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .category { background: var(--card); padding: 25px; border-radius: 15px; border: 1px solid #222; }
-        .category h3 { color: var(--red); border-bottom: 1px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; }
-        .menu-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; }
-        .menu-item span:first-child { color: #eee; font-weight: 600; }
-        .menu-item .price { color: var(--gold); font-weight: bold; }
-
-        /* Contact & Info */
-        .info-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
-        .info-card { background: var(--card); padding: 30px; border-radius: 15px; text-align: center; border-top: 3px solid var(--gold); }
-        .info-card i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 15, 15, 0.95);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--gold);
+            display: flex; justify-content: space-between; align-items: center;
+        }
         
-        /* Map */
-        #map { width: 100%; height: 400px; border-radius: 20px; border: 1px solid var(--gold); margin-top: 40px; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); font-weight: bold; letter-spacing: 2px; }
+        
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
 
-        footer { text-align: center; padding: 40px; background: #000; color: #777; border-top: 1px solid #222; }
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1595708681242-8c39335616dc?q=80&w=2070');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold);
+            margin-bottom: 15px; text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+        }
+        
+        header p { font-size: 1.2rem; color: #ddd; margin-bottom: 30px; letter-spacing: 1px; }
+
+        .btn-gold {
+            padding: 12px 35px; border: 2px solid var(--gold); background: transparent;
+            color: var(--gold); font-weight: 600; text-transform: uppercase;
+            border-radius: 50px; transition: 0.3s;
+        }
+        .btn-gold:hover { background: var(--gold); color: var(--dark); cursor: pointer; }
+
+        /* --- MENU SECTIONS --- */
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        
+        .section-title {
+            text-align: center; font-family: 'Playfair Display', serif; 
+            font-size: 2.8rem; color: var(--gold); margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px; 
+            background: var(--red-accent); margin: 10px auto 0;
+        }
+
+        .category-container { margin-bottom: 60px; }
+        .category-title {
+            font-size: 1.8rem; color: var(--gold); margin-bottom: 25px;
+            border-left: 4px solid var(--red-accent); padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        .menu-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
+        }
+
+        .menu-item {
+            background: var(--card-bg); padding: 20px; border-radius: 8px;
+            border: 1px solid #333; transition: 0.3s;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .menu-item:hover { transform: translateY(-5px); border-color: var(--gold); }
+
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+        .item-name { font-weight: 600; font-size: 1.1rem; color: #fff; }
+        .item-price { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
+        .item-desc { font-size: 0.85rem; color: var(--text-dim); font-style: italic; line-height: 1.4; }
+
+        /* --- CONTACT & INFO --- */
+        .info-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;
+        }
+        .info-box {
+            text-align: center; padding: 30px; background: var(--card-bg);
+            border-radius: 10px; border-bottom: 3px solid var(--gold);
+        }
+        .info-box i { font-size: 2rem; color: var(--gold); margin-bottom: 15px; }
+        .info-box h3 { margin-bottom: 10px; color: #fff; }
+        .info-box p { color: var(--text-dim); }
+
+        .map-container {
+            width: 100%; height: 400px; border-radius: 15px; overflow: hidden; border: 2px solid #333;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center; padding: 30px; background: #000;
+            color: #666; font-size: 0.9rem; border-top: 1px solid #222;
+        }
+
+        /* --- WHATSAPP FLOATING BUTTON --- */
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px;
+            background-color: #25d366; color: #FFF; border-radius: 50px;
+            text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover { background-color: #128c7e; transform: scale(1.1); }
+
+        /* Responsive Text */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .nav-logo { margin: auto; }
+        }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-</nav>
+    <nav>
+        <div class="nav-logo">U WOOD LOVE</div>
+        <div class="nav-links">
+            <a href="#starters">Starters</a>
+            <a href="#pizza">Pizza</a>
+            <a href="#desserts">Desserts</a>
+            <a href="#drinks">Drinks</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<section id="home">
-    <h1>U WOOD LOVE</h1>
-    <p>Authentic Wood Fired Pizza & Homemade Flavors</p>
-    <div>
-        <a href="#menu" class="btn">View Menu</a>
-        <a href="#contact" class="btn">Book a Table</a>
-    </div>
-</section>
+    <header id="home">
+        <h1>U WOOD LOVE</h1>
+        <p>Wood Fired Pizza & Homemade Happiness</p>
+        <p style="font-size: 0.9rem; margin-top: -20px; color: var(--gold);">OPEN: 16:30 - 00:30</p>
+        <br>
+        <a href="#menu" class="btn-gold">View Full Menu</a>
+    </header>
 
-<section id="menu">
-    <h2>Our Full Menu</h2>
-    <div class="menu-grid">
-        <div class="category">
-            <h3>Starters</h3>
-            <div class="menu-item"><span>Focaccia</span> <span class="price">30 DHS</span></div>
-            <div class="menu-item"><span>Bruschetta (3 pcs)</span> <span class="price">30 DHS</span></div>
-            <div class="menu-item"><span>Moroccan Salad</span> <span class="price">40 DHS</span></div>
-            <div class="menu-item"><span>Caesar Salad</span> <span class="price">60 DHS</span></div>
-        </div>
-        <div class="category">
-            <h3>Wood Fired Pizza</h3>
-            <div class="menu-item"><span>Margherita</span> <span class="price">45 DHS</span></div>
-            <div class="menu-item"><span>Napoletana</span> <span class="price">60 DHS</span></div>
-            <div class="menu-item"><span>Sea Food</span> <span class="price">90 DHS</span></div>
-            <div class="menu-item"><span>Honey Goat</span> <span class="price">80 DHS</span></div>
-        </div>
-        <div class="category">
-            <h3>Lasagna & Desserts</h3>
-            <div class="menu-item"><span>Bolognese Lasagna</span> <span class="price">75 DHS</span></div>
-            <div class="menu-item"><span>Tiramisu</span> <span class="price">40 DHS</span></div>
-            <div class="menu-item"><span>Panna Cotta</span> <span class="price">30 DHS</span></div>
-            <div class="menu-item"><span>Dolce Pizza</span> <span class="price">50 DHS</span></div>
-        </div>
-        <div class="category">
-            <h3>Fresh Drinks</h3>
-            <div class="menu-item"><span>Fresh Lemonade</span> <span class="price">25 DHS</span></div>
-            <div class="menu-item"><span>Mocktail Mojito</span> <span class="price">30 DHS</span></div>
-            <div class="menu-item"><span>Pink Boost</span> <span class="price">35 DHS</span></div>
-            <div class="menu-item"><span>Moroccan Tea</span> <span class="price">15/20 DHS</span></div>
-        </div>
-    </div>
-</section>
+    <section id="menu">
+        <h2 class="section-title">Our Menu</h2>
 
-<section id="about">
-    <h2>Our Story</h2>
-    <p style="text-align: center; max-width: 800px; margin: auto; color: #bbb;">
-        At <b>U WOOD LOVE</b>, we believe in the power of tradition. Our dough is handcrafted and our sauces are made daily. 
-        Everything is cooked in our signature wood-fired oven to give you that authentic smokey flavor you love.
-    </p>
-</section>
-
-<section id="contact">
-    <h2>Visit Us</h2>
-    <div class="info-container">
-        <div class="info-card">
-            <i class="fas fa-phone"></i>
-            <h3>Call Us</h3>
-            <p>+212 6XX-XXXXXX</p>
+        <div class="category-container" id="starters">
+            <h3 class="category-title"><i class="fas fa-leaf"></i> Starters - Entrées</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Focaccia</span><span class="item-price">30 DHS</span></div><div class="item-desc">Pain italien traditionnel, basilic, huile d'olive, parmesan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Bruschetta (3 pcs)</span><span class="item-price">30 DHS</span></div><div class="item-desc">Pain ciabatta toasté, tomates cerises, oignons, pesto.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Garlic Bread</span><span class="item-price">30 DHS</span></div><div class="item-desc">Pain ciabatta toasté, ail, persil, parmesan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Moroccan Salad</span><span class="item-price">40 DHS</span></div><div class="item-desc">Tomates, oignons, concombres, poivrons marinés.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Vegan Salad</span><span class="item-price">40 DHS</span></div><div class="item-desc">Laitue, tomates cerises, caviar d'aubergine, carottes.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Estiva Salad</span><span class="item-price">45 DHS</span></div><div class="item-desc">Roquette, jambon de dinde fumé, tomates cerises, parmesan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Nicoise Salad</span><span class="item-price">50 DHS</span></div><div class="item-desc">Thon, œufs, olives, pommes de terre, haricots verts.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Caesar Salad</span><span class="item-price">60 DHS</span></div><div class="item-desc">Poulet cuit sous vide, parmesan, croûtons, sauce César.</div></div>
+            </div>
         </div>
-        <div class="info-card">
-            <i class="fas fa-clock"></i>
-            <h3>Opening Hours</h3>
-            <p>Daily: 16:30 - 00:30</p>
-        </div>
-        <div class="info-card">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>Location</h3>
-            <p>RN1 ZGOUMI TAMRAGHT, Awrir</p>
-        </div>
-    </div>
-    <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3434.904!2d-9.678!3d30.505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDMwJzE4LjAiTiA5wrA0MCc0MC44Ilc!5e0!3m2!1sen!2sma!4v1620000000000" allowfullscreen="" loading="lazy"></iframe>
-</section>
 
-<footer>
-    <p>© 2026 U WOOD LOVE. Designed with Heart in Tamraght.</p>
-</footer>
+        <div class="category-container" id="pizza">
+            <h3 class="category-title"><i class="fas fa-pizza-slice"></i> Wood Fired Pizza</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Bruschetta Pizza</span><span class="item-price">40 DHS</span></div><div class="item-desc">Tomates cerises, oignons, basilic, ail, origan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Marinara</span><span class="item-price">40 DHS</span></div><div class="item-desc">Sauce tomate, ail, origan, basilic (No Cheese).</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Margherita</span><span class="item-price">45 DHS</span></div><div class="item-desc">Sauce tomate, mozzarella, basilic.</div></div>
+                
+                <div class="menu-item"><div class="item-header"><span class="item-name">Napoletana</span><span class="item-price">60 DHS</span></div><div class="item-desc">Anchois, câpres, olives, origan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Vegan Pizza</span><span class="item-price">60 DHS</span></div><div class="item-desc">Champignons, ratatouille, olives (No Cheese).</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Elisabetta</span><span class="item-price">60 DHS</span></div><div class="item-desc">Jambon de dinde fumé, champignons.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Ocean</span><span class="item-price">65 DHS</span></div><div class="item-desc">Thon, oignons, champignons, olives noires.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Veggie</span><span class="item-price">65 DHS</span></div><div class="item-desc">Crème fraîche, ratatouille, artichauts, tomates cerises.</div></div>
+                
+                <div class="menu-item"><div class="item-header"><span class="item-name">Estiva Pizza</span><span class="item-price">70 DHS</span></div><div class="item-desc">Jambon fumé, roquette, tomates cerises, balsamique.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Oriental</span><span class="item-price">75 DHS</span></div><div class="item-desc">Merguez, poivrons marinés, champignons.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Formaggi</span><span class="item-price">75 DHS</span></div><div class="item-desc">Crème fraîche, gorgonzola, parmesan, mozzarella.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Kefta</span><span class="item-price">75 DHS</span></div><div class="item-desc">Viande hachée, champignons, poivrons marinés.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Chicken</span><span class="item-price">75 DHS</span></div><div class="item-desc">Crème fraîche, poulet, artichauts, olives.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Capricciosa</span><span class="item-price">75 DHS</span></div><div class="item-desc">Jambon, olives noires, artichauts, champignons.</div></div>
 
-</body>
-</html>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Little Truffle</span><span class="item-price">80 DHS</span></div><div class="item-desc">Crème truffe, champignons, amandes effilées.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Honey Goat</span><span class="item-price">80 DHS</span></div><div class="item-desc">Chèvre, noix dorées, roquette, miel.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Black Formaggi</span><span class="item-price">85 DHS</span></div><div class="item-desc">Crème truffe, gorgonzola, parmesan.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Nordic</span><span class="item-price">85 DHS</span></div><div class="item-desc">Saumon, oignons, artichauts, aneth.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Sea Food</span><span class="item-price">90 DHS</span></div><div class="item-desc">Cocktail de fruits de mer, persil, ail.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Half / Half</span><span class="item-price">95 DHS</span></div><div class="item-desc">Réunissez deux pizzas en une seule !</div></div>
+            </div>
+        </div>
+
+        <div class="category-container">
+            <h3 class="category-title"><i class="fas fa-layer-group"></i> Lasagna</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Bolognese Lasagna</span><span class="item-price">75 DHS</span></div><div class="item-desc">Sauce bolognaise et béchamel maison (3-4h cuisson).</div></div>
+            </div>
+        </div>
+
+        <div class="category-container" id="desserts">
+            <h3 class="category-title"><i class="fas fa-ice-cream"></i> Homemade Desserts</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Banana Bread</span><span class="item-price">20 DHS</span></div><div class="item-desc">Gâteau moelleux banane/nutella + coulis caramel.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Panna Cotta</span><span class="item-price">30 DHS</span></div><div class="item-desc">Coulis de framboise maison.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Ice Cream "U Wood Love"</span><span class="item-price">35 DHS</span></div><div class="item-desc">Fruits secs, coulis caramel & framboise.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Traditional Tiramisu</span><span class="item-price">40 DHS</span></div><div class="item-desc">Mascarpone, œufs, café, cacao.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Dolce Pizza</span><span class="item-price">50 DHS</span></div><div class="item-desc">Amlou, Nutella, fruits frais, noix.</div></div>
+            </div>
+        </div>
+
+        <div class="category-container" id="drinks">
+            <h3 class="category-title"><i class="fas fa-cocktail"></i> Fresh Drinks</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Fresh Lemonade</span><span class="item-price">25 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Orange Juice</span><span class="item-price">25 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Detox Green / Carrot</span><span class="item-price">30 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Mocktail Mojito</span><span class="item-price">30 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Mocktail Rio / Sunrise</span><span class="item-price">30 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Pink Boost</span><span class="item-price">35 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Raspberry Smoothie</span><span class="item-price">35 DHS</span></div></div>
+            </div>
+        </div>
+        
+        <div class="category-container">
+            <h3 class="category-title"><i class="fas fa-mug-hot"></i> Coffee & Softs</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Water / Soft Drinks</span><span class="item-price">10-15 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Espresso / Ristretto</span><span class="item-price">15 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Cappuccino / Latte</span><span class="item-price">25 DHS</span></div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Moroccan Tea</span><span class="item-price">15 / 20 DHS</span></div></div>
+            </div>
+        </div>
+        
+        <div class="category-container">
+            <h3 class="category-title"><i class="fas fa-plus-circle"></i> Extras</h3>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="item-header"><span class="item-name">Veggie Extras</span><span class="item-price">5-10 DHS</span></div><div class="item-desc">Onions, olives, mushrooms, etc.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Protein Extras</span><span class="item-price">15-20 DHS</span></div><div class="item-desc">Tuna, Ham, Chicken, Kefta.</div></div>
+                <div class="menu-item"><div class="item-header"><span class="item-name">Seafood Extras</span><span class="item-price">25-30 DHS</span></div><div class="item-desc">Salmon, Squid, Prawns.</div></div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Find Us</h2>
+        
+        <div class="info-grid">
+            <div class="info-box">
+                <i class="fab fa-whatsapp"></i>
+                <h3>Order & Book</h3>
+                <p>06 11 30 38 62</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-clock"></i>
+                <h3>Opening Hours</h3>
+                <p>Every Day</p>
+                <p style="color: var(--gold); font-weight: bold;">16:30 - 00:30</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-map-pin"></i>
+                <h3>Address</h3>
+                <p>RN1 ZGOUMI TAMRAGHT</p>
+                <p>Awrir, Morocco</p>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.123456789!2d-9.6800!3d30.5000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM3DCsDMwJzAwLjAiTiA5wrA0MCcwMC4wIlc!5e0!3m2!1sen!2sma!4v1600000000000!5m2!1sen!2sma" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 U WOOD LOVE. All Rights Reserved.</p>
+    </footer>
+
+    <
