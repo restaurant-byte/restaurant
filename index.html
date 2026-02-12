@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U WOOD LOVE | Premium Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+            --text-gray: #b0b0b0;
+            --neon-red: #ff3131;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body { background-color: var(--dark-bg); color: white; line-height: 1.6; overflow-x: hidden; }
+
+        /* Background Animation */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
+            z-index: -1;
+        }
+
+        header {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), var(--dark-bg)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; border-bottom: 2px solid var(--gold);
+        }
+
+        .logo { 
+            font-size: 3.5rem; color: var(--gold); text-transform: uppercase; 
+            letter-spacing: 8px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .tagline { font-style: italic; color: var(--text-gray); margin-top: 10px; }
+
+        .container { max-width: 1000px; margin: -50px auto 50px; padding: 0 20px; }
+
+        .menu-section {
+            background: var(--card-bg); border-radius: 20px; padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #222;
+            margin-bottom: 40px;
+        }
+
+        h2 { 
+            color: var(--gold); text-align: center; margin-bottom: 30px; 
+            text-transform: uppercase; letter-spacing: 3px; border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .category-title { 
+            grid-column: 1 / -1; color: var(--neon-red); font-size: 1.5rem; 
+            margin-top: 20px; display: flex; align-items: center; gap: 10px;
+        }
+
+        .item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; border-radius: 10px; background: #1f1f1f;
+            transition: 0.3s; border-left: 3px solid transparent;
+        }
+
+        .item:hover { 
+            background: #252525; border-left: 3px solid var(--gold); 
+            transform: translateX(10px); box-shadow: -10px 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .item-info h4 { font-size: 1.1rem; color: #fff; }
+        .item-info p { font-size: 0.8rem; color: var(--text-gray); max-width: 200px; }
+
+        .price { color: var(--gold); font-weight: bold; font-size: 1.2rem; min-width: 80px; text-align: right;}
+
+        .map-section { border-radius: 20px; overflow: hidden; border: 1px solid var(--gold); margin-top: 20px;}
+
+        footer { text-align: center; padding: 40px; color: var(--text-gray); font-size: 0.9rem; border-top: 1px solid #222; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            .logo { font-size: 2rem; }
+            .menu-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">U WOOD LOVE</div>
+    <p class="tagline">100% Homemade - Tamraght</p>
+</header>
+
+<div class="container">
+    <div class="menu-section">
+        <div class="grid">
+            <div class="category-title"><i class="fas fa-leaf"></i> Starters</div>
+            <div class="item">
+                <div class="item-info"><h4>Focaccia / Bruschetta</h4><p>Traditional Italian bread</p></div>
+                <div class="price">30 DHS</div>
+            </div>
+            <div class="item">
+                <div class="item-info"><h4>Nicoise Salad</h4><p>Tuna, eggs, olives, vegetables</p></div>
+                <div class="price">50 DHS</div>
+            </div>
+
+            <div class="category-title"><i class="fas fa-pizza-slice"></i> Wood Fired Pizza</div>
+            <div class="item">
+                <div class="item-info"><h4>Margherita</h4><p>Tomato, mozzarella, basil</p></div>
+                <div class="price">45 DHS</div>
+            </div>
+            <div class="item">
+                <div class="item-info"><h4>Sea Food</h4><p>Fresh seafood cocktail</p></div>
+                <div class="price">90 DHS</div>
+            </div>
+            <div class="item">
+                <div class="item-info"><h4>Little Truffle</h4><p>Truffle cream, mushrooms</p></div>
+                <div class="price">80 DHS</div>
+            </div>
+
+            <div class="category-title"><i class="fas fa-glass-martini-alt"></i> Fresh Drinks</div>
+            <div class="item">
+                <div class="item-info"><h4>Mocktail Mojito</h4><p>Mint, lemon, soda</p></div>
+                <div class="price">30 DHS</div>
+            </div>
+            <div class="item">
+                <div class="item-info"><h4>Detox Green</h4><p>Apple, celery, cucumber</p></div>
+                <div class="price">30 DHS</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Visit Us</h2>
+    <div class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.4727181368!2d-9.680000!3d30.510000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDMwJzM2LjAiTiA5wrA0MCc0OC4wIlc!5e0!3m2!1sen!2sma!4v1700000000000!5m2!1sen!2sma" 
+        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</div>
+
+<footer>
+    <p><i class="fas fa-map-marker-alt"></i> RN1 ZGOUMI TAMRAGHT, Awrir</p>
+    <p>© 2026 Crafted for U Wood Love Business</p>
+</footer>
+
+</body>
+</html>
