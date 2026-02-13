@@ -1,286 +1,697 @@
-'use client';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash Brothers Joint | Agadir</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Phone, MapPin, Clock, Star, Wifi, 
-  Car, Utensils, ShoppingBag, Truck, CheckCircle, Map 
-} from 'lucide-react';
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
-// --- DATA & CONFIG ---
-const THEME = {
-  black: "#121212",
-  yellow: "#FFD700",
-  darkGray: "#1E1E1E",
-  white: "#FFFFFF"
-};
-
-const FEATURES = [
-  { icon: Wifi, label: "Free WiFi" },
-  { icon: CheckCircle, label: "Restroom" },
-  { icon: Car, label: "Free Parking" },
-  { icon: Utensils, label: "Dine-in" },
-  { icon: ShoppingBag, label: "Takeout" },
-  { icon: Truck, label: "Delivery" },
-];
-
-const MENU = {
-  burgers: [
-    { name: "Classic Smash", price: 35, desc: "Prime beef, cheddar, smash sauce, pickles" },
-    { name: "Double Smash", price: 50, desc: "Double patty, double cheese, maximum crust" },
-    { name: "Triple Smash", price: 60, desc: "The ultimate stack for the hungry" },
-    { name: "Chicken Burger", price: 35, desc: "Crispy fried chicken, lettuce, mayo" },
-    { name: "Double Chicken", price: 50, desc: "Double crispy fillet, double flavor" },
-    { name: "Onions Lover", price: 35, desc: "Smashed with caramelized onions" },
-  ],
-  addons: [
-    { name: "Caramelized Onions", price: 5 },
-    { name: "Cheese", price: 3 },
-    { name: "Special Sauce", price: 5 },
-    { name: "Extra Beef Patty", price: 15 },
-    { name: "Extra Chicken Tender", price: 15 },
-    { name: "Home Made Pickles", price: "FREE" },
-  ],
-  sides: [
-    { name: "Large Fries", price: 10 },
-    { name: "Loaded Fries", price: 25, badge: "Best Seller" },
-    { name: "Chicken Strips x3", price: 20 },
-    { name: "Chicken Strips x6", price: 35 },
-    { name: "Cheese Balls", price: 20 },
-  ],
-  drinks: [
-    { name: "Soda 33cl", price: 10 },
-    { name: "Mineral Water", price: 5 },
-    { name: "Signature Mocktails", price: 15 },
-  ],
-  desserts: [
-    { name: "Homemade Cookie", price: 15 },
-    { name: "Homemade Brownie", price: 15 },
-  ]
-};
-
-// --- COMPONENTS ---
-
-const SectionHeader = ({ title, subtitle }: { title: string, subtitle?: string }) => (
-  <div className="mb-12 text-center">
-    <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-white mb-2 font-bebas">
-      {title}
-    </h2>
-    {subtitle && <div className="w-24 h-1 bg-[#FFD700] mx-auto rounded-full"></div>}
-  </div>
-);
-
-const MenuItem = ({ item, isAddon = false }: { item: any, isAddon?: boolean }) => (
-  <motion.div 
-    whileHover={{ scale: 1.02 }}
-    className={`p-6 border border-zinc-800 bg-[#1a1a1a] rounded-xl flex justify-between items-center group transition-colors hover:border-[#FFD700] ${isAddon ? 'py-4' : ''}`}
-  >
-    <div>
-      <h3 className="text-xl font-bold text-white uppercase tracking-wide group-hover:text-[#FFD700] transition-colors">
-        {item.name}
-      </h3>
-      {item.desc && <p className="text-zinc-400 text-sm mt-1">{item.desc}</p>}
-      {item.badge && (
-        <span className="inline-block mt-2 text-xs font-bold bg-[#FFD700] text-black px-2 py-0.5 rounded">
-          {item.badge}
-        </span>
-      )}
+    <div class="preloader">
+        <div class="counter">0%</div>
+        <div class="loader-text">INITIALIZING SMASH PROTOCOL...</div>
     </div>
-    <div className="text-2xl font-bebas font-bold text-[#FFD700]">
-      {typeof item.price === 'number' ? `${item.price} DH` : item.price}
+
+    <nav>
+        <div class="logo">SMASH BROS.</div>
+        <button class="magnetic-btn menu-btn">
+            <span>MENU</span>
+        </button>
+    </nav>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <section class="hero">
+                <div class="canvas-container" id="canvas-container"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <div class="line">SMASH.</div>
+                        <div class="line text-orange">TASTE.</div>
+                        <div class="line">REPEAT.</div>
+                    </h1>
+                    <div class="hero-cta">
+                        <button class="magnetic-btn order-btn">ORDER NOW</button>
+                    </div>
+                </div>
+                <div class="hero-scroll-indicator">
+                    <span>SCROLL TO EAT</span>
+                </div>
+            </section>
+
+            <section class="marquee">
+                <div class="track">
+                    <div class="content">
+                        &nbsp;PREMIUM BEEF • HOMEMADE BUNS • AGADIR VIBES • 100% SMASH • 
+                        PREMIUM BEEF • HOMEMADE BUNS • AGADIR VIBES • 100% SMASH • 
+                    </div>
+                </div>
+            </section>
+
+            <section class="about container">
+                <div class="about-text">
+                    <h2>RATED 4.8/5 <br><span class="text-outline">LEGENDARY STATUS</span></h2>
+                    <p>We don't just cook burgers; we engineer textures. Located in the heart of Agadir, we combine industrial aesthetics with street-food soul.</p>
+                    <div class="amenities">
+                        <div class="amenity"><i data-lucide="wifi"></i> Free WiFi</div>
+                        <div class="amenity"><i data-lucide="car"></i> Parking</div>
+                        <div class="amenity"><i data-lucide="snowflake"></i> AC</div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="img-block"></div>
+                </div>
+            </section>
+
+            <section class="menu container" id="menu">
+                <h2 class="section-header">THE LINEUP</h2>
+                
+                <div class="menu-grid">
+                    <div class="category">
+                        <h3 class="cat-title">BURGERS</h3>
+                        <ul class="menu-list" id="burger-list">
+                            </ul>
+                    </div>
+
+                    <div class="category-col">
+                        <div class="category">
+                            <h3 class="cat-title">SIDES</h3>
+                            <ul class="menu-list" id="sides-list"></ul>
+                        </div>
+                        <div class="category">
+                            <h3 class="cat-title">ADD-ONS</h3>
+                            <div class="addons-tags" id="addons-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="footer-content container">
+                    <div class="contact-info">
+                        <h3>VISIT US</h3>
+                        <p><i data-lucide="map-pin"></i> n°21 bis Rue Changuit, Agadir 80000</p>
+                        <p><i data-lucide="clock"></i> Daily: 12:30 PM - 12:00 AM</p>
+                        <a href="tel:+212781632100" class="phone-link">
+                            <i data-lucide="phone"></i> +212 7 81 63 21 00
+                        </a>
+                    </div>
+                    <div class="map-placeholder">
+                        <span>MAP INTEGRATION</span>
+                    </div>
+                </div>
+                <div class="copyright">
+                    &copy; 2024 SMASH BROTHERS JOINT. AGADIR.
+                </div>
+            </footer>
+
+        </div>
     </div>
-  </motion.div>
-);
 
-export default function SmashBrothersLanding() {
-  const [activeTab, setActiveTab] = useState('burgers');
-
-  return (
-    <div className="min-h-screen bg-[#121212] font-sans selection:bg-[#FFD700] selection:text-black">
-      
-      {/* GLOBAL FONT LOADING SIMULATION */}
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
-        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
-        .font-sans { font-family: 'Montserrat', sans-serif; }
-      `}</style>
-
-      {/* --- NAVBAR --- */}
-      <nav className="fixed w-full z-50 bg-[#121212]/90 backdrop-blur-md border-b border-zinc-800">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-black text-white font-bebas tracking-wider">
-            SMASH BROTHERS<span className="text-[#FFD700]">.</span>
-          </div>
-          <a href="tel:+212781632100" className="hidden md:flex items-center gap-2 bg-[#FFD700] text-black px-4 py-2 rounded font-bold hover:bg-yellow-400 transition">
-            <Phone size={18} />
-            <span>+212 7 81 63 21 00</span>
-          </a>
-        </div>
-      </nav>
-
-      {/* --- HERO SECTION --- */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Overlay */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=2665&auto=format&fit=crop')] bg-cover bg-center">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/80 via-[#121212]/60 to-[#121212]"></div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-6 text-center mt-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center justify-center gap-2 mb-4">
-               <Star className="text-[#FFD700] fill-[#FFD700]" />
-               <span className="text-white font-bold tracking-widest uppercase">Rated 4.8/5 in Agadir</span>
-               <Star className="text-[#FFD700] fill-[#FFD700]" />
-            </div>
-            <h1 className="text-6xl md:text-9xl font-bebas text-white leading-none mb-6 drop-shadow-2xl">
-              AGADIR'S ULTIMATE <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-yellow-600">
-                SMASH EXPERIENCE
-              </span>
-            </h1>
-            <p className="text-xl text-zinc-300 max-w-2xl mx-auto mb-8 font-light">
-              Real beef. Crispy edges. Soft buns. The authentic smash burger taste on Rue Changuit.
-            </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <a href="#menu" className="bg-[#FFD700] text-black px-8 py-4 rounded font-bold text-lg hover:bg-yellow-400 transition transform hover:-translate-y-1">
-                VIEW FULL MENU
-              </a>
-              <a href="https://maps.google.com" target="_blank" className="border border-white text-white px-8 py-4 rounded font-bold text-lg hover:bg-white hover:text-black transition">
-                GET DIRECTIONS
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </header>
-
-      {/* --- PROOF & AMENITIES --- */}
-      <section className="py-12 border-y border-zinc-800 bg-[#1a1a1a]">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
-            {FEATURES.map((feat, i) => (
-              <div key={i} className="flex flex-col items-center gap-2 text-zinc-400 hover:text-[#FFD700] transition-colors">
-                <feat.icon size={28} />
-                <span className="text-sm font-semibold uppercase">{feat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- MENU SECTION --- */}
-      <section id="menu" className="py-24 bg-[#121212]">
-        <div className="container mx-auto px-6">
-          <SectionHeader title="OUR MENU" subtitle={true} />
-
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16">
-            {Object.keys(MENU).map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveTab(cat)}
-                className={`px-6 py-2 rounded-full font-bold uppercase tracking-wider text-sm transition-all
-                  ${activeTab === cat 
-                    ? 'bg-[#FFD700] text-black shadow-[0_0_20px_rgba(255,215,0,0.3)]' 
-                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Menu Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* @ts-ignore */}
-            {MENU[activeTab].map((item, index) => (
-              <MenuItem key={index} item={item} isAddon={activeTab === 'addons'} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --- INFO / LOCATION --- */}
-      <section className="py-24 bg-[#1a1a1a] relative overflow-hidden">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          
-          <div className="space-y-8">
-            <h2 className="text-5xl font-bebas text-white">FIND US</h2>
-            
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-zinc-800 rounded-lg text-[#FFD700]">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-lg">Visit the Joint</h4>
-                  <p className="text-zinc-400">n°21 bis Rue Changuit<br/>Agadir 80000, Morocco</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-zinc-800 rounded-lg text-[#FFD700]">
-                  <Clock size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-lg">Opening Hours</h4>
-                  <p className="text-zinc-400">Open Daily</p>
-                  <p className="text-[#FFD700] font-bold">12:30 PM - 12:00 AM</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-zinc-800 rounded-lg text-[#FFD700]">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h4 className="text-white font-bold text-lg">Call to Order</h4>
-                  <a href="tel:+212781632100" className="text-2xl font-bebas text-white hover:text-[#FFD700] transition">
-                    +212 7 81 63 21 00
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Map Placeholder */}
-          <div className="h-[400px] w-full bg-zinc-800 rounded-2xl overflow-hidden relative group">
-            <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/50 group-hover:bg-zinc-900/30 transition z-10">
-               <div className="text-center">
-                 <Map className="w-12 h-12 text-[#FFD700] mx-auto mb-2" />
-                 <span className="text-white font-bold">View on Google Maps</span>
-               </div>
-            </div>
-            {/* Visual placeholder for map */}
-            <img 
-               src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=2662&auto=format&fit=crop" 
-               className="w-full h-full object-cover grayscale opacity-50" 
-               alt="Map Location" 
-            />
-          </div>
-
-        </div>
-      </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="bg-black py-12 border-t border-zinc-900">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bebas text-white mb-6">SMASH BROTHERS JOINT</h2>
-          <div className="flex justify-center gap-6 mb-8">
-            {['Instagram', 'Facebook', 'TikTok'].map((social) => (
-              <a key={social} href="#" className="text-zinc-500 hover:text-[#FFD700] transition font-bold uppercase text-sm">
-                {social}
-              </a>
-            ))}
-          </div>
-          <p className="text-zinc-600 text-sm">
-            © {new Date().getFullYear()} Smash Brothers Joint. Agadir, Morocco. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
-  );
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --primary-orange: #FF5E00;
+    --cheese-yellow: #FFC700;
+    --gray-dark: #111;
+    --gray-light: #2A2A2A;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: none; /* Hide default cursor */
+}
+
+/* --- GRAIN OVERLAY --- */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* --- CUSTOM CURSOR --- */
+.cursor-dot, .cursor-outline {
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+}
+.cursor-dot {
+    width: 8px; height: 8px;
+    background-color: var(--primary-orange);
+}
+.cursor-outline {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: width 0.2s, height 0.2s;
+}
+
+/* --- PRELOADER --- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--primary-orange);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-display);
+}
+.counter { font-size: 8rem; font-weight: bold; color: black; }
+.loader-text { font-family: var(--font-body); letter-spacing: 2px; color: black; margin-top: 1rem; }
+
+/* --- TYPOGRAPHY & UTILS --- */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.text-orange { color: var(--primary-orange); }
+.text-outline { -webkit-text-stroke: 1px var(--text-color); color: transparent; }
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: -1px; }
+
+/* --- BUTTONS --- */
+.magnetic-btn {
+    padding: 1rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: white;
+    border-radius: 50px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.3s, color 0.3s;
+}
+.magnetic-btn:hover { background: white; color: black; }
+.order-btn {
+    background: var(--primary-orange);
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 94, 0, 0.4);
+}
+.order-btn:hover { background: var(--cheese-yellow); }
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.canvas-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    pointer-events: none; /* Let clicks pass through to canvas */
+}
+.hero-title {
+    font-family: var(--font-display);
+    font-size: 10vw;
+    line-height: 0.85;
+    text-transform: uppercase;
+    font-style: italic;
+}
+.hero-cta { pointer-events: auto; margin-top: 3rem; }
+
+/* --- MARQUEE --- */
+.marquee {
+    background: var(--primary-orange);
+    padding: 3rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee .track {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: 900;
+    color: black;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+/* --- ABOUT SECTION --- */
+.about {
+    padding: 10rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+.about h2 { font-family: var(--font-display); font-size: 4rem; line-height: 1; margin-bottom: 2rem; }
+.about p { color: #888; font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; }
+.amenities { display: flex; gap: 2rem; color: var(--cheese-yellow); font-weight: 600; }
+.amenity { display: flex; align-items: center; gap: 0.5rem; }
+.img-block {
+    height: 500px;
+    background: var(--gray-light);
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    /* Placeholder Gradient */
+    background: linear-gradient(45deg, #222, #333);
+}
+
+/* --- MENU SECTION --- */
+.menu { padding: 5rem 2rem; }
+.section-header {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 5rem;
+    color: var(--gray-light);
+    opacity: 0.5;
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+}
+.cat-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary-orange);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s;
+}
+.menu-item:hover { transform: translateX(10px); }
+.item-info h4 { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 0.5rem; }
+.item-info p { font-size: 0.9rem; color: #666; }
+.item-price { font-family: var(--font-display); font-size: 1.2rem; color: var(--cheese-yellow); }
+
+.addons-tags { display: flex; flex-wrap: wrap; gap: 1rem; }
+.tag {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+.tag:hover { background: var(--primary-orange); color: black; border-color: var(--primary-orange); }
+
+/* --- FOOTER --- */
+footer {
+    background: var(--gray-dark);
+    padding: 5rem 0 2rem 0;
+    margin-top: 5rem;
+}
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+.contact-info h3 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 2rem; }
+.contact-info p { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; color: #888; }
+.phone-link {
+    display: flex; align-items: center; gap: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem; color: var(--primary-orange);
+    text-decoration: none; margin-top: 2rem;
+}
+.map-placeholder {
+    width: 100%; height: 250px;
+    background: #1a1a1a;
+    border-radius: 1rem;
+    border: 2px dashed #333;
+    display: flex; justify-content: center; align-items: center;
+    color: #444; font-family: var(--font-display); letter-spacing: 2px;
+}
+.copyright { text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title { font-size: 15vw; }
+    .about, .menu-grid, .footer-content { grid-template-columns: 1fr; }
+    .marquee .track { font-size: 3rem; }
+}
+// --- MENU DATA ---
+const menuData = {
+    burgers: [
+        { name: "Classic Smash", price: "35dh", desc: "Smashed beef patty, cheddar, house sauce." },
+        { name: "Double Smash", price: "50dh", desc: "Double beef, double cheese, max crust." },
+        { name: "Triple Smash", price: "60dh", desc: "The Boss. Triple everything." },
+        { name: "Onions Lover", price: "35dh", desc: "Caramelized onions overload." },
+        { name: "Chicken Burger", price: "35dh", desc: "Crispy fried chicken breast." },
+        { name: "Double Chicken", price: "50dh", desc: "Double crispy chicken." }
+    ],
+    sides: [
+        { name: "Large Fries", price: "10dh" },
+        { name: "Loaded Fries", price: "25dh" },
+        { name: "Chicken Strips x3", price: "20dh" },
+        { name: "Cheese Balls", price: "20dh" }
+    ],
+    addons: [
+        "Caramelized Onions (5dh)", "Cheese (3dh)", "Sauce (5dh)", "Beef Patty (15dh)"
+    ]
+};
+
+// --- INIT APP ---
+document.addEventListener("DOMContentLoaded", () => {
+    initLenis();
+    initLoader();
+    initThreeJS();
+    renderMenu();
+    initCursor();
+    initMagneticButtons();
+    initAnimations();
+});
+
+// --- 1. SMOOTH SCROLL (LENIS) ---
+function initLenis() {
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+}
+
+// --- 2. PRELOADER ---
+function initLoader() {
+    let progress = 0;
+    const counter = document.querySelector(".counter");
+    const preloader = document.querySelector(".preloader");
+    
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 10) + 1;
+        if (progress > 100) progress = 100;
+        counter.textContent = `${progress}%`;
+        
+        if (progress === 100) {
+            clearInterval(interval);
+            // Animation out
+            gsap.to(preloader, {
+                y: "-100%",
+                duration: 1,
+                ease: "power4.inOut",
+                delay: 0.5
+            });
+            // Trigger Hero Anims
+            gsap.from(".hero-title .line", {
+                y: 150,
+                opacity: 0,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "power3.out",
+                delay: 1.2
+            });
+        }
+    }, 30);
+}
+
+// --- 3. THREE.JS BURGER SCENE ---
+function initThreeJS() {
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 6;
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // --- PROCEDURAL BURGER CONSTRUCTION ---
+    const burgerGroup = new THREE.Group();
+
+    // Material Helper
+    const breadMat = new THREE.MeshStandardMaterial({ color: 0xD98E34, roughness: 0.6 });
+    const meatMat = new THREE.MeshStandardMaterial({ color: 0x3E2723, roughness: 0.8 });
+    const cheeseMat = new THREE.MeshStandardMaterial({ color: 0xFFC700, roughness: 0.2, metalness: 0.1 });
+    const lettuceMat = new THREE.MeshStandardMaterial({ color: 0x4CAF50, roughness: 0.5 });
+
+    // Top Bun
+    const topBunGeo = new THREE.CylinderGeometry(1.4, 1.5, 0.8, 32);
+    const topBun = new THREE.Mesh(topBunGeo, breadMat);
+    topBun.position.y = 1.0;
+    burgerGroup.add(topBun);
+
+    // Cheese
+    const cheeseGeo = new THREE.BoxGeometry(2.6, 0.1, 2.6);
+    const cheese = new THREE.Mesh(cheeseGeo, cheeseMat);
+    cheese.position.y = 0.55;
+    cheese.rotation.y = 0.5;
+    burgerGroup.add(cheese);
+
+    // Patty
+    const pattyGeo = new THREE.CylinderGeometry(1.6, 1.6, 0.5, 32);
+    const patty = new THREE.Mesh(pattyGeo, meatMat);
+    patty.position.y = 0.25;
+    burgerGroup.add(patty);
+
+    // Bottom Bun
+    const botBunGeo = new THREE.CylinderGeometry(1.5, 1.4, 0.6, 32);
+    const botBun = new THREE.Mesh(botBunGeo, breadMat);
+    botBun.position.y = -0.3;
+    burgerGroup.add(botBun);
+
+    scene.add(burgerGroup);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+    scene.add(ambientLight);
+
+    const spotLight = new THREE.SpotLight(0xFF5E00, 2);
+    spotLight.position.set(5, 5, 5);
+    scene.add(spotLight);
+
+    // Animation Loop
+    let mouseX = 0;
+    let mouseY = 0;
+
+    // Mouse Movement for Parallax
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Idle Rotation
+        burgerGroup.rotation.y += 0.005;
+
+        // Mouse Parallax
+        burgerGroup.rotation.x = THREE.MathUtils.lerp(burgerGroup.rotation.x, mouseY * 0.2, 0.05);
+        burgerGroup.rotation.z = THREE.MathUtils.lerp(burgerGroup.rotation.z, mouseX * 0.2, 0.05);
+
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // Responsive
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Scroll Effect on Burger
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(burgerGroup.rotation, {
+        y: Math.PI * 2, // Spin fully
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+}
+
+// --- 4. RENDER MENU ---
+function renderMenu() {
+    const burgerList = document.getElementById('burger-list');
+    const sidesList = document.getElementById('sides-list');
+    const addonsList = document.getElementById('addons-list');
+
+    // Render Burgers
+    menuData.burgers.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'menu-item';
+        li.innerHTML = `
+            <div class="item-info">
+                <h4>${item.name}</h4>
+                <p>${item.desc}</p>
+            </div>
+            <div class="item-price">${item.price}</div>
+        `;
+        burgerList.appendChild(li);
+    });
+
+    // Render Sides
+    menuData.sides.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'menu-item';
+        li.innerHTML = `
+            <div class="item-info"><h4>${item.name}</h4></div>
+            <div class="item-price">${item.price}</div>
+        `;
+        sidesList.appendChild(li);
+    });
+
+    // Render Addons
+    menuData.addons.forEach(item => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.innerText = item;
+        addonsList.appendChild(span);
+    });
+}
+
+// --- 5. CUSTOM CURSOR ---
+function initCursor() {
+    const dot = document.querySelector(".cursor-dot");
+    const outline = document.querySelector(".cursor-outline");
+
+    window.addEventListener("mousemove", (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Dot follows instantly
+        dot.style.left = `${posX}px`;
+        dot.style.top = `${posY}px`;
+
+        // Outline follows with lag using GSAP
+        gsap.to(outline, {
+            x: posX,
+            y: posY,
+            duration: 0.15,
+            ease: "power2.out"
+        });
+    });
+
+    // Hover effects
+    document.querySelectorAll('a, button, .menu-item').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(outline, { scale: 1.5, borderColor: '#FF5E00', duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+            gsap.to(outline, { scale: 1, borderColor: 'rgba(255,255,255,0.5)', duration: 0.3 });
+        });
+    });
+}
+
+// --- 6. MAGNETIC BUTTONS ---
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('.magnetic-btn');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
             
+            gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3 });
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)' });
+        });
+    });
+}
+
+// --- 7. GENERAL ANIMATIONS ---
+function initAnimations() {
+    // Marquee Scrolling
+    gsap.to(".marquee .track", {
+        xPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".marquee",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.5
+        }
+    });
+
+    // Menu Fade Up
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach((item, index) => {
+        gsap.from(item, {
+            y: 50,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: item,
+                start: "top 90%",
+            }
+        });
+    });
+}
