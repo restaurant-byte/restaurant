@@ -1,288 +1,475 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O' Paris Go - Marrakech | Le Meilleur Tacos</title>
+    <title>Restaurant Landing Page</title>
+    <!-- استدعاء مكتبة أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- RESET & VARIABLES --- */
-        :root {
-            --primary: #ff6b00; /* لون برتقالي فاتح للماكلة */
-            --secondary: #1a1a1a; /* كحل عصري */
-            --light: #f4f4f4;
-            --text: #333;
-            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        /* إعدادات عامة */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--light);
-            color: var(--text);
+            background-color: #9e0000; /* اللون الأحمر الغامق للخلفية */
+            color: white;
             overflow-x: hidden;
         }
 
-        [...](asc_slot://start-slot-13)/* --- NAVIGATION --- */
-        nav {
-            background: rgba(26, 26, 26, 0.95);
-            padding: 1rem 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .logo {
+        /* الأزرار */
+        .btn-yellow {
+            background-color: #ffc107;
             color: #fff;
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .logo span { color: var(--primary); }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--primary); }
-
-        .btn-order {
-            background: var(--primary);
-            color: #fff;
+            border: none;
             padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
             font-weight: bold;
-            transition: transform 0.3s;
-        }
-
-        .btn-order:hover { transform: scale(1.05); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1561758033-d8f19662cb23?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
+            gap: 5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .btn-yellow:hover {
+            background-color: #e0a800;
         }
 
-        .hero h1 {
-            font-size: 4rem;
+        .cart-icon {
+            background-color: #ffc107;
+            padding: 8px;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section (الجزء العلوي) */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 0;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-            animation: fadeInDown 1s ease;
+            text-transform: uppercase;
         }
 
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            max-width: 600px;
-            animation: fadeInUp 1s ease 0.5s forwards;
-            opacity: 0;
+        .hero-text p {
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            max-width: 400px;
         }
 
-        /* --- MENU HIGHLIGHTS --- */
-        .section-title {
+        .hero-img {
+            flex: 1;
             text-align: center;
-            font-size: 2.5rem;
-            margin: 80px 0 40px;
-            color: var(--secondary);
-        }
-
-        .section-title span { color: var(--primary); border-bottom: 3px solid var(--primary); }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 5%;
-            margin-bottom: 80px;
-        }
-
-        .menu-item {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
             position: relative;
         }
 
-        .menu-item:hover { transform: translateY(-10px); }
-
-        .menu-img {
-            height: 200px;
-            background-color: #ddd;
-            background-size: cover;
-            background-position: center;
+        .hero-img img {
+            max-width: 100%;
+            border-radius: 50%;
+            /* تأثير بسيط لمحاكاة الصورة */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .menu-content { padding: 20px; }
-        .menu-content h3 { color: var(--secondary); margin-bottom: 10px; }
-        .menu-content p { color: #666; font-size: 0.9rem; margin-bottom: 15px; }
-        .price { color: var(--primary); font-weight: bold; font-size: 1.2rem; }
-        
-        /* صور تقريبية من Unsplash */
-        .img-tacos { background-image: url('https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&w=500&q=60'); }
-        .img-burger { background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=60'); }
-        .img-dessert { background-image: url('https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=500&q=60'); }
+        /* قسم القائمة (Our Menu) */
+        .menu-section {
+            padding: 50px 0;
+        }
 
-        /* --- INFO BAR --- */
-        .info-bar {
-            background: var(--secondary);
-            color: #fff;
-            padding: 50px 5%;
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .menu-list {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* العنصر المحدد (الأبيض) كما في الصورة */
+        .menu-item.active {
+            background-color: white;
+            color: #9e0000;
+            border-radius: 5px;
+        }
+
+        .menu-item-info h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .menu-item-desc {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            max-width: 400px;
+        }
+        
+        .menu-item.active .menu-item-desc {
+            color: #666;
+        }
+
+        .menu-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Categories Section */
+        .categories {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .category-card {
+            background-color: #7a0000;
+            padding: 20px;
+            width: 45%;
+            display: flex;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .cat-text {
+            flex: 1;
+        }
+        .cat-text h3 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        .cat-img {
+            width: 120px;
+            height: 120px;
+            background-color: #ddd; /* مكان الصورة */
+            border-radius: 50%;
+            margin-left: 15px;
+            background-image: url('https://via.placeholder.com/150/d32f2f/fff?text=Food'); /* صورة مؤقتة */
+            background-size: cover;
+        }
+
+        /* Product Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .product-card {
+            background-color: #b71c1c;
+            border: 1px solid #d32f2f;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .prod-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-color: #eee;
+            background-image: url('https://via.placeholder.com/150/ffcc80/333?text=Dish');
+            background-size: cover;
+            border: 3px solid white;
+        }
+
+        .product-card h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+        
+        .about-img {
+            flex: 1;
             text-align: center;
         }
+        .about-img img {
+            max-width: 80%;
+            border-radius: 50%;
+        }
 
-        .info-box { margin: 20px; min-width: 200px; }
-        .info-box i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
-        .info-box h3 { margin-bottom: 10px; }
+        .about-text {
+            flex: 1;
+            padding-left: 40px;
+        }
 
-        [...](asc_slot://start-slot-15)/* --- FOOTER --- */
-        footer {
-            background: #111;
-            color: #aaa;
+        .about-text h2 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Footer / Take-out */
+        .takeout-banner {
+            background-color: white;
+            color: #333;
             text-align: center;
             padding: 20px;
+            margin: 40px auto;
+            max-width: 500px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .takeout-banner h2 {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #222;
+        }
+
+        .takeout-banner p {
             font-size: 0.9rem;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Mobile menu simple for now */
+            color: #ffc107;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    [...](asc_slot://start-slot-17)<!-- Navigation -->
-    <nav>
-        <div class="logo">O' PARIS <span>GO</span></div>
-        <div class="nav-links">
-            <a href="#home">Accueil</a>
-            <a href="#menu">Menu</a>
-            <a href="#about">A propos</a>
-        </div>
-        <a href="tel:+212600000000" class="btn-order">Commander <i class="fas fa-phone-alt"></i></a>
-    </nav>
+    <div class="container">
+        <!-- Header / Hero -->
+        <header class="hero">
+            <div class="hero-text">
+                <h1>Delicious<br>Noodles Dish</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <button class="btn-yellow">Learn More <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="hero-img">
+                <!-- صورة توضيحية -->
+                <img src="https://via.placeholder.com/400x300/ffcc80/333?text=Noodle+Bowl" alt="Noodles">
+            </div>
+        </header>
 
-    [...](asc_slot://start-slot-19)<!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>Le Goût de Paris à Marrakech</h1>
-        <p>Les meilleurs Tacos Gratinés, Burgers Gourmets et une ambiance inoubliable.</p>
-        <a href="#menu" class="btn-order" style="background: #fff; color: var(--primary);">Voir le Menu</a>
-    </section>
+        <!-- Our Menu -->
+        <section class="menu-section">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-list">
+                <!-- Item 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h3>Peking Roasted Duck</h3>
+                        <div class="menu-icons">
+                            <span><i class="fas fa-utensils"></i></span>
+                            <span><i class="fas fa-cloud-meatball"></i></span>
+                        </div>
+                    </div>
+                    <div class="menu-item-desc">
+                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
+                    </div>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
 
-    <!-- Menu Section -->
-    <section id="menu">
-        <h2 class="section-title">Nos <span>Spécialités</span></h2>
-        
-        <div class="menu-grid">
-            <!-- Item 1 -->
-            <div class="menu-item">
-                <div class="menu-img img-tacos"></div>
-                <div class="menu-content">
-                    <h3>Tacos Gratiné XL</h3>
-                    <p>Sauce fromagère maison, viandes au choix, gratiné au cheddar et emmental.</p>
-                    <div class="price">À partir de 60 DH</div>
+                <!-- Item 2 (Active/White) -->
+                <div class="menu-item active">
+                    <div class="menu-item-info">
+                        <h3>Kung Pao Chicken</h3>
+                        <div class="menu-icons">
+                            <span><i class="fas fa-utensils"></i></span>
+                            <span><i class="fas fa-cloud-meatball"></i></span>
+                        </div>
+                    </div>
+                    <div class="menu-item-desc">
+                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
+                    </div>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h3>Sweet and Sour Pork</h3>
+                        <div class="menu-icons">
+                            <span><i class="fas fa-utensils"></i></span>
+                            <span><i class="fas fa-cloud-meatball"></i></span>
+                        </div>
+                    </div>
+                    <div class="menu-item-desc">
+                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
+                    </div>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h3>Ma Po Tofu</h3>
+                        <div class="menu-icons">
+                            <span><i class="fas fa-utensils"></i></span>
+                            <span><i class="fas fa-cloud-meatball"></i></span>
+                        </div>
+                    </div>
+                    <div class="menu-item-desc">
+                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
+                    </div>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
                 </div>
             </div>
+        </section>
 
-            <!-- Item 2 -->
-            <div class="menu-item">
-                <div class="menu-img img-burger"></div>
-                <div class="menu-content">
-                    <h3>Burger "Le Parisien"</h3>
-                    <p>Steak pur bœuf, fromage fondant, salade fraîche et notre sauce secrète.</p>
-                    <div class="price">55 DH</div>
+        <!-- Categories -->
+        <h2 class="section-title">Categories</h2>
+        <section class="categories">
+            <div class="category-card">
+                <div class="cat-text">
+                    <h3>Penne Pasta In<br>Tomato Sauce</h3>
+                </div>
+                <div class="cat-img"></div>
+            </div>
+            <div class="category-card">
+                <div class="cat-text">
+                    <h3>Pasta Colored<br>Farfalle Salad</h3>
+                </div>
+                <div class="cat-img"></div>
+            </div>
+        </section>
+
+        <!-- Product -->
+        <h2 class="section-title">Product</h2>
+        <section class="products-grid">
+            <!-- Card 1 -->
+            <div class="product-card">
+                <div class="prod-img"></div>
+                <h4>Chicken Vegetable Sup</h4>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="price-row">
+                    <span class="price">$5.00</span>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
                 </div>
             </div>
-
-            <!-- Item 3 -->
-            <div class="menu-item">
-                <div class="menu-img img-dessert"></div>
-                <div class="menu-content">
-                    <h3>Fondant au Chocolat</h3>
-                    <p>Le dessert parfait pour finir en beauté. Cœur coulant irrésistible.</p>
-                    <div class="price">30 DH</div>
+            <!-- Card 2 -->
+            <div class="product-card">
+                <div class="prod-img"></div>
+                <h4>Dark Sauce Meal Dish</h4>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="price-row">
+                    <span class="price">$10.00</span>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
                 </div>
             </div>
-        </div>
-    </section>
+            <!-- Card 3 -->
+            <div class="product-card">
+                <div class="prod-img"></div>
+                <h4>National Uzbek Pilaf</h4>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="price-row">
+                    <span class="price">$50.00</span>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="product-card">
+                <div class="prod-img"></div>
+                <h4>Chicken Chines Rise</h4>
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="price-row">
+                    <span class="price">$100.00</span>
+                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+            </div>
+        </section>
 
-    [...](asc_slot://start-slot-21)<!-- Info Section -->
-    <section class="info-bar" id="about">
-        <div class="info-box">
-            <i class="fas fa-map-marker-alt"></i>
-            <h3>Localisation</h3>
-            <p>Près de Clinique Aéroport<br>Marrakech, Maroc</p>
-        </div>
-        <div class="info-box">
-            <i class="fas fa-clock"></i>
-            <h3>Horaires</h3>
-            <p>Ouvert tous les jours<br>Jusqu'à minuit</p>
-        </div>
-        <div class="info-box">
-            <i class="fas fa-star"></i>
-            <h3>Qualité</h3>
-            <p>Noté 4.6/5<br>Service Rapide & Propre</p>
-        </div>
-    </section>
+        <!-- About Us -->
+        <section class="about-section">
+            <div class="about-img">
+                <img src="https://via.placeholder.com/350x350/ffcc80/333?text=About+Us" alt="About">
+            </div>
+            <div class="about-text">
+                <h2>About Us</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                <button class="btn-yellow">Learn More</button>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 O' Paris Go Marrakech. Design by Gemini Enterprise.</p>
-    </footer>
+        <!-- Take Out Service -->
+        <div class="takeout-banner">
+            <h2>Take - Out Service</h2>
+            <p>AVAILABLE DAILY • 9AM - 12PM</p>
+        </div>
 
-    [...](asc_slot://start-slot-23)<script>
-        // Simple scroll effect for navbar
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(26, 26, 26, 1)';
-            } else {
-                nav.style.background = 'rgba(26, 26, 26, 0.95)';
-            }
-        });
-    </script>
+    </div>
 </body>
 </html>
