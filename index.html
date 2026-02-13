@@ -3,473 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Landing Page</title>
-    <!-- استدعاء مكتبة أيقونات FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* إعدادات عامة */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #9e0000; /* اللون الأحمر الغامق للخلفية */
-            color: white;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* الأزرار */
-        .btn-yellow {
-            background-color: #ffc107;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-        
-        .btn-yellow:hover {
-            background-color: #e0a800;
-        }
-
-        .cart-icon {
-            background-color: #ffc107;
-            padding: 8px;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* Hero Section (الجزء العلوي) */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 50px 0;
-        }
-
-        .hero-text {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero-text p {
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            max-width: 400px;
-        }
-
-        .hero-img {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-img img {
-            max-width: 100%;
-            border-radius: 50%;
-            /* تأثير بسيط لمحاكاة الصورة */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        /* قسم القائمة (Our Menu) */
-        .menu-section {
-            padding: 50px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* العنصر المحدد (الأبيض) كما في الصورة */
-        .menu-item.active {
-            background-color: white;
-            color: #9e0000;
-            border-radius: 5px;
-        }
-
-        .menu-item-info h3 {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
-
-        .menu-item-desc {
-            font-size: 0.7rem;
-            opacity: 0.8;
-            max-width: 400px;
-        }
-        
-        .menu-item.active .menu-item-desc {
-            color: #666;
-        }
-
-        .menu-icons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        /* Categories Section */
-        .categories {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            padding: 40px 0;
-        }
-
-        .category-card {
-            background-color: #7a0000;
-            padding: 20px;
-            width: 45%;
-            display: flex;
-            align-items: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .cat-text {
-            flex: 1;
-        }
-        .cat-text h3 {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            line-height: 1.2;
-        }
-        .cat-img {
-            width: 120px;
-            height: 120px;
-            background-color: #ddd; /* مكان الصورة */
-            border-radius: 50%;
-            margin-left: 15px;
-            background-image: url('https://via.placeholder.com/150/d32f2f/fff?text=Food'); /* صورة مؤقتة */
-            background-size: cover;
-        }
-
-        /* Product Section */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
-
-        .product-card {
-            background-color: #b71c1c;
-            border: 1px solid #d32f2f;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .prod-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            background-color: #eee;
-            background-image: url('https://via.placeholder.com/150/ffcc80/333?text=Dish');
-            background-size: cover;
-            border: 3px solid white;
-        }
-
-        .product-card h4 {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .stars {
-            color: #ffc107;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .price {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        /* About Section */
-        .about-section {
-            display: flex;
-            align-items: center;
-            padding: 60px 0;
-        }
-        
-        .about-img {
-            flex: 1;
-            text-align: center;
-        }
-        .about-img img {
-            max-width: 80%;
-            border-radius: 50%;
-        }
-
-        .about-text {
-            flex: 1;
-            padding-left: 40px;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* Footer / Take-out */
-        .takeout-banner {
-            background-color: white;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-            margin: 40px auto;
-            max-width: 500px;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .takeout-banner h2 {
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: #222;
-        }
-
-        .takeout-banner p {
-            font-size: 0.9rem;
-            color: #ffc107;
-            font-weight: bold;
-        }
-    </style>
+    <title>NEXUS GOURMET | The Future of Dining</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Importing a futuristic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header / Hero -->
-        <header class="hero">
-            <div class="hero-text">
-                <h1>Delicious<br>Noodles Dish</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <button class="btn-yellow">Learn More <i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="hero-img">
-                <!-- صورة توضيحية -->
-                <img src="https://via.placeholder.com/400x300/ffcc80/333?text=Noodle+Bowl" alt="Noodles">
-            </div>
-        </header>
+    <!-- Background Video / Animation Container -->
+    <div class="bg-overlay"></div>
+    <div class="particles" id="particles-js"></div>
 
-        <!-- Our Menu -->
-        <section class="menu-section">
-            <h2 class="section-title">Our Menu</h2>
-            <div class="menu-list">
-                <!-- Item 1 -->
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h3>Peking Roasted Duck</h3>
-                        <div class="menu-icons">
-                            <span><i class="fas fa-utensils"></i></span>
-                            <span><i class="fas fa-cloud-meatball"></i></span>
-                        </div>
-                    </div>
-                    <div class="menu-item-desc">
-                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
-                    </div>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
+    <header>
+        <div class="logo">NEXUS <span class="blink">GOURMET</span></div>
+        <nav>
+            <ul>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#menu">Holographic Menu</a></li>
+                <li><a href="#reserve" class="btn-primary">AI Reservation</a></li>
+            </ul>
+        </nav>
+    </header>
 
-                <!-- Item 2 (Active/White) -->
-                <div class="menu-item active">
-                    <div class="menu-item-info">
-                        <h3>Kung Pao Chicken</h3>
-                        <div class="menu-icons">
-                            <span><i class="fas fa-utensils"></i></span>
-                            <span><i class="fas fa-cloud-meatball"></i></span>
-                        </div>
-                    </div>
-                    <div class="menu-item-desc">
-                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
-                    </div>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h3>Sweet and Sour Pork</h3>
-                        <div class="menu-icons">
-                            <span><i class="fas fa-utensils"></i></span>
-                            <span><i class="fas fa-cloud-meatball"></i></span>
-                        </div>
-                    </div>
-                    <div class="menu-item-desc">
-                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
-                    </div>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="menu-item">
-                    <div class="menu-item-info">
-                        <h3>Ma Po Tofu</h3>
-                        <div class="menu-icons">
-                            <span><i class="fas fa-utensils"></i></span>
-                            <span><i class="fas fa-cloud-meatball"></i></span>
-                        </div>
-                    </div>
-                    <div class="menu-item-desc">
-                        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.
-                    </div>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Dining, <span class="gradient-text">Evolved.</span></h1>
+                <p>Zero Waiters. 100% Precision. Taste the Singularity.</p>
+                <button onclick="activateAI()" class="pulse-btn">Initiate Order Protocol</button>
             </div>
         </section>
 
-        <!-- Categories -->
-        <h2 class="section-title">Categories</h2>
-        <section class="categories">
-            <div class="category-card">
-                <div class="cat-text">
-                    <h3>Penne Pasta In<br>Tomato Sauce</h3>
-                </div>
-                <div class="cat-img"></div>
+        <!-- AI Chat Interface (Hidden by default) -->
+        <div id="ai-interface" class="ai-modal hidden">
+            <div class="ai-header">
+                <span>SYSTEM: ONLINE</span>
+                <button onclick="closeAI()">X</button>
             </div>
-            <div class="category-card">
-                <div class="cat-text">
-                    <h3>Pasta Colored<br>Farfalle Salad</h3>
-                </div>
-                <div class="cat-img"></div>
+            <div class="chat-window" id="chat-window">
+                <div class="msg bot">Welcome to Nexus. I am AURA, your culinary architect. How may I customize your nutrient profile today?</div>
             </div>
-        </section>
-
-        <!-- Product -->
-        <h2 class="section-title">Product</h2>
-        <section class="products-grid">
-            <!-- Card 1 -->
-            <div class="product-card">
-                <div class="prod-img"></div>
-                <h4>Chicken Vegetable Sup</h4>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <div class="price-row">
-                    <span class="price">$5.00</span>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
+            <div class="input-area">
+                <input type="text" id="user-input" placeholder="Transmit request..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">SEND</button>
             </div>
-            <!-- Card 2 -->
-            <div class="product-card">
-                <div class="prod-img"></div>
-                <h4>Dark Sauce Meal Dish</h4>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <div class="price-row">
-                    <span class="price">$10.00</span>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="product-card">
-                <div class="prod-img"></div>
-                <h4>National Uzbek Pilaf</h4>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <div class="price-row">
-                    <span class="price">$50.00</span>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-            </div>
-            <!-- Card 4 -->
-            <div class="product-card">
-                <div class="prod-img"></div>
-                <h4>Chicken Chines Rise</h4>
-                <div class="stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <div class="price-row">
-                    <span class="price">$100.00</span>
-                    <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Us -->
-        <section class="about-section">
-            <div class="about-img">
-                <img src="https://via.placeholder.com/350x350/ffcc80/333?text=About+Us" alt="About">
-            </div>
-            <div class="about-text">
-                <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                <button class="btn-yellow">Learn More</button>
-            </div>
-        </section>
-
-        <!-- Take Out Service -->
-        <div class="takeout-banner">
-            <h2>Take - Out Service</h2>
-            <p>AVAILABLE DAILY • 9AM - 12PM</p>
         </div>
+    </main>
 
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
