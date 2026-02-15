@@ -1,402 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Experience | GSAP + Three.js</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+    <title>LUXE BOUTIQUE | متجر الأناقة</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+
         :root {
-            --bg: #0a0a0a;
-            --primary: #00f3ff;
-            --secondary: #bc13fe;
-            --text: #ffffff;
-            --glass: rgba(255, 255, 255, 0.05);
+            --primary: #1a1a1a; /* أسود */
+            --accent: #D4AF37; /* ذهبي */
+            --light: #f9f9f9;
+            --text: #333;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } /* Custom Cursor Active */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: var(--bg);
+            font-family: 'Tajawal', sans-serif;
+            background-color: #fff;
             color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
         }
 
-        /* --- LOADER --- */
-        #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100vh;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease;
-        }
-        .svg-logo path {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 2;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: draw 2s forwards;
-        }
-        @keyframes draw {
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* --- CUSTOM CURSOR --- */
-        .cursor {
-            position: fixed;
-            width: 20px; height: 20px;
-            border: 1px solid var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            transition: width 0.3s, height 0.3s, background 0.3s;
-            mix-blend-mode: difference;
-        }
-        .cursor-trail {
-            position: fixed;
-            width: 8px; height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            opacity: 0.6;
-        }
-
-        /* --- HERO SECTION --- */
+        /* Header */
         header {
-            height: 100vh;
-            position: relative;
+            background: #fff;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--accent); }
+
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        .cart-icon { position: relative; cursor: pointer; }
+        .cart-count { 
+            position: absolute; top: -8px; right: -8px; 
+            background: var(--accent); color: #fff; 
+            font-size: 10px; padding: 2px 5px; border-radius: 50%; 
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
-            padding: 0 10%;
-            overflow: hidden;
-        }
-        
-        #canvas-container {
-            position: absolute;
-            top: 0; right: 0;
-            width: 60%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0; /* Fade in later */
+            justify-content: center;
+            text-align: center;
+            color: #fff;
         }
 
-        .hero-content {
-            z-index: 10;
-            max-width: 600px;
-        }
-
-        h1 {
-            font-size: 5rem;
-            line-height: 1;
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--text), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0; /* Animated with GSAP */
-            transform: translateY(50px);
         }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; }
 
-        .typewriter {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            font-family: monospace;
-            margin-bottom: 40px;
-            min-height: 1.5em;
-        }
-
-        /* --- MAGNETIC BUTTON --- */
-        .magnetic-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--primary);
-            border-radius: 30px;
-            color: var(--primary);
+        .btn {
+            padding: 12px 35px;
+            background: var(--accent);
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.4s;
-            opacity: 0; /* GSAP */
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .magnetic-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--primary);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
-        }
-        
-        .magnetic-btn:hover { color: #000; }
-        .magnetic-btn:hover::before { transform: scaleX(1); transform-origin: left; }
+        .btn:hover { background: #b59226; }
 
-        /* --- SECTIONS (Cards with Tilt) --- */
-        section {
-            padding: 100px 10%;
-            min-height: 100vh;
+        /* Categories */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
         }
-        
-        .grid {
+
+        .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 5%;
+        }
+
+        .cat-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .cat-card:hover img { transform: scale(1.1); }
+        .cat-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .cat-overlay h3 { color: #fff; font-size: 1.8rem; border-bottom: 2px solid var(--accent); padding-bottom: 5px; }
+
+        /* Products Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
+            padding: 20px 5%;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .product-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); }
+
+        .prod-img { height: 250px; width: 100%; background: #f4f4f4; position: relative; overflow: hidden;}
+        .prod-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .prod-info { padding: 15px; text-align: center; }
+        .prod-cat { color: #888; font-size: 0.8rem; margin-bottom: 5px; }
+        .prod-title { font-weight: 600; margin-bottom: 10px; color: var(--primary); }
+        .prod-price { color: var(--accent); font-weight: 800; font-size: 1.1rem; }
+        
+        .add-btn {
+            width: 100%; padding: 10px;
+            background: var(--primary); color: #fff;
+            border: none; margin-top: 10px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .add-btn:hover { background: var(--accent); }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
             margin-top: 50px;
         }
+        .socials { margin: 20px 0; }
+        .socials i { margin: 0 10px; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .socials i:hover { color: var(--accent); }
 
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 20px;
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-            transition: transform 0.1s;
-            opacity: 0; /* Scroll Reveal */
-            transform: translateY(50px);
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            nav ul { display: none; } /* Simplified for demo */
         }
-
-        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.5rem; }
-        .card p { color: #aaa; line-height: 1.6; }
-
-        /* Scroll Progress */
-        .progress-bar {
-            position: fixed;
-            top: 0; left: 0; height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            width: 0%;
-            z-index: 99999;
-        }
-
     </style>
 </head>
 <body>
 
-    <div class="progress-bar" id="progressBar"></div>
-
-    <div class="cursor"></div>
-    <div class="cursor-trail"></div>
-
-    <div id="loader">
-        <svg class="svg-logo" width="100" height="100" viewBox="0 0 100 100">
-            <path d="M10 10 H90 V90 H10 Z" />
-        </svg>
-    </div>
-
     <header>
-        <div class="hero-content">
-            <h1 id="hero-title">NEXT LEVEL<br>DESIGN</h1>
-            <div class="typewriter" id="typewriter"></div>
-            <a href="#" class="magnetic-btn" id="hero-btn">DISCOVER MORE</a>
+        <div class="logo">LUXE<span>BOUTIQUE</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#shop">المتجر</a></li>
+                <li><a href="#">من نحن</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" onclick="alert('سلة المشتريات فارغة حالياً')">
+            <i class="fas fa-shopping-bag fa-lg"></i>
+            <span class="cart-count">0</span>
         </div>
-        <div id="canvas-container"></div>
     </header>
 
-    <section>
-        <h2 style="font-size: 3rem; margin-bottom: 20px; text-transform: uppercase;">Features</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Glassmorphism</h3>
-                <p>Ultra-modern UI using blur effects and transparency for a futuristic feel.</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>الأناقة تبدأ من هنا</h1>
+            <p>أحدث تشكيلات الحقائب والعطور الفاخرة</p>
+            <a href="#shop" class="btn">تسوقي الآن</a>
+        </div>
+    </section>
+
+    <h2 class="section-title">الأقسام</h2>
+    <section class="categories">
+        <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000" alt="Bags">
+            <div class="cat-overlay"><h3>حقائب يد</h3></div>
+        </div>
+        <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000" alt="Perfume">
+            <div class="cat-overlay"><h3>عطور فاخرة</h3></div>
+        </div>
+        <div class="cat-card">
+            <img src="https://images.unsplash.com/photo-1512163143273-bde0e3cc540f?q=80&w=1000" alt="Accessories">
+            <div class="cat-overlay"><h3>إكسسوارات</h3></div>
+        </div>
+    </section>
+
+    <h2 class="section-title" id="shop">وصل حديثاً</h2>
+    <section class="products">
+        <div class="product-card">
+            <div class="prod-img">
+                <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=800" alt="Bag">
             </div>
-            <div class="card">
-                <h3>3D Interactive</h3>
-                <p>Elements that react to your mouse movement in real-time space.</p>
+            <div class="prod-info">
+                <div class="prod-cat">حقائب</div>
+                <div class="prod-title">حقيبة كلاسيك سوداء</div>
+                <div class="prod-price">350 DH</div>
+                <button class="add-btn" onclick="addToCart()">أضف للسلة</button>
             </div>
-            <div class="card">
-                <h3>GSAP Power</h3>
-                <p>Smooth, timeline-based animations that tell a story as you scroll.</p>
+        </div>
+
+        <div class="product-card">
+            <div class="prod-img">
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800" alt="Perfume">
+            </div>
+            <div class="prod-info">
+                <div class="prod-cat">عطور</div>
+                <div class="prod-title">عطر العود الملكي</div>
+                <div class="prod-price">450 DH</div>
+                <button class="add-btn" onclick="addToCart()">أضف للسلة</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="prod-img">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=800" alt="Bag">
+            </div>
+            <div class="prod-info">
+                <div class="prod-cat">حقائب</div>
+                <div class="prod-title">حقيبة بيج عصرية</div>
+                <div class="prod-price">399 DH</div>
+                <button class="add-btn" onclick="addToCart()">أضف للسلة</button>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <div class="prod-img">
+                <img src="https://images.unsplash.com/photo-1616196237586-3a780b72a6a6?q=80&w=800" alt="Perfume">
+            </div>
+            <div class="prod-info">
+                <div class="prod-cat">عطور</div>
+                <div class="prod-title">مسك أبيض فاخر</div>
+                <div class="prod-price">250 DH</div>
+                <button class="add-btn" onclick="addToCart()">أضف للسلة</button>
             </div>
         </div>
     </section>
 
+    <footer>
+        <div class="logo" style="color: #fff; margin-bottom: 20px;">LUXE<span>BOUTIQUE</span></div>
+        <div class="socials">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-facebook"></i>
+        </div>
+        <p>&copy; 2024 جميع الحقوق محفوظة</p>
+    </footer>
+
     <script>
-        // --- 1. LOADER ---
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    initHeroAnimations();
-                }, 1000);
-            }, 2500); // Wait for stroke animation
-        });
-
-        // --- 2. CUSTOM CURSOR ---
-        const cursor = document.querySelector('.cursor');
-        const trail = document.querySelector('.cursor-trail');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            // Trail delay effect
-            setTimeout(() => {
-                trail.style.left = e.clientX + 'px';
-                trail.style.top = e.clientY + 'px';
-            }, 50);
-        });
-
-        // Hover effect on links
-        document.querySelectorAll('a, .card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                cursor.style.background = 'rgba(255,255,255,0.1)';
-                cursor.style.border = 'none';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.background = 'transparent';
-                cursor.style.border = '1px solid var(--primary)';
-            });
-        });
-
-        // --- 3. THREE.JS 3D SCENE ---
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        const container = document.getElementById('canvas-container');
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
-
-        // Geometry (Icosahedron for tech vibe)
-        const geometry = new THREE.IcosahedronGeometry(1.5, 0);
-        const material = new THREE.MeshNormalMaterial({ wireframe: true });
-        const shape = new THREE.Mesh(geometry, material);
-        scene.add(shape);
-
-        camera.position.z = 5;
-
-        // Animation Loop for 3D
-        function animate3D() {
-            requestAnimationFrame(animate3D);
-            shape.rotation.x += 0.005;
-            shape.rotation.y += 0.005;
-            
-            // Mouse Interaction for 3D
-            shape.rotation.x += (mouseY * 0.001);
-            shape.rotation.y += (mouseX * 0.001);
-
-            renderer.render(scene, camera);
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.querySelector('.cart-count').innerText = count;
+            alert('تمت إضافة المنتج للسلة بنجاح!');
         }
-        
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX - window.innerWidth / 2;
-            mouseY = e.clientY - window.innerHeight / 2;
-        });
-
-        animate3D();
-
-        // Handle Resize
-        window.addEventListener('resize', () => {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        });
-
-        // --- 4. GSAP ANIMATIONS ---
-        function initHeroAnimations() {
-            const tl = gsap.timeline();
-            
-            // Fade in 3D
-            gsap.to('#canvas-container', { opacity: 1, duration: 2 });
-
-            // Hero Text Reveal
-            tl.to('#hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power4.out' })
-              .to('#hero-btn', { opacity: 1, duration: 0.5 }, "-=0.5");
-
-            // Typewriter Effect
-            const text = "Creating Digital Masterpieces";
-            let i = 0;
-            const typeWriterElement = document.getElementById('typewriter');
-            
-            function type() {
-                if (i < text.length) {
-                    typeWriterElement.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, 50);
-                }
-            }
-            type();
-        }
-
-        // --- 5. MAGNETIC BUTTON EFFECT ---
-        const btn = document.querySelector('.magnetic-btn');
-        btn.addEventListener('mousemove', (e) => {
-            const pos = btn.getBoundingClientRect();
-            const x = e.clientX - pos.left - pos.width / 2;
-            const y = e.clientY - pos.top - pos.height / 2;
-
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0px, 0px)';
-        });
-
-        // --- 6. SCROLL ANIMATIONS (Intersection Observer) ---
-        const cards = document.querySelectorAll('.card');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    // Stagger effect manually
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100); 
-                }
-            });
-        }, { threshold: 0.1 });
-
-        cards.forEach(card => observer.observe(card));
-
-        // --- 7. TILT 3D CARD EFFECT ---
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-                const rotateY = ((x - centerX) / centerX) * 10;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-
-        // --- 8. SCROLL PROGRESS BAR ---
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-        });
-
     </script>
 </body>
 </html>
